@@ -29,15 +29,36 @@ export default class Produtos extends Component {
         })
     }
 
+    handlerKeyUp(key) {
+        if(key.keyCode == 13) {
+            axios.post('http://localhost:3001/categorias',{
+                categoria: this.refs.newCategory.value
+            }).then( res => {
+                let s = this.state
+                s.categorias.push(res.data)
+                this.setState(s)
+                this.refs.newCategory.value = ''
+            })
+        }
+    }
+
     render() {
         return(
             <div className="row">
                 <div className="col-md-2">
                     <h3>Categorias</h3>
                     {this.renderLinkCategorias.bind(this)()}
+                    <div className="well">
+                        <input 
+                            onKeyUp={this.handlerKeyUp.bind(this)}
+                            placeholder="Nova categoria"
+                            maxLength={20}
+                            className="form-control"
+                            ref="newCategory"
+                        />
+                    </div>
                 </div>
                 <div className="col-md-10">
-                <h1>Produtos</h1>
                 <Route exact path={this.props.match.url} component={ProdutosHome} />
                 <Route path={this.props.match.url+'/categorias/:catId'} component={Categorias} />
                 </div>
