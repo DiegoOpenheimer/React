@@ -22,16 +22,8 @@
       "categoria": "Limpeza"
     },
     {
-      "id": 2,
-      "categoria": "Alimentos"
-    },
-    {
-      "categoria": "Primeiro teste",
-      "id": 3
-    },
-    {
-      "categoria": "Corinthians",
-      "id": 4
+      "categoria": "Alimentos",
+      "id": 2
     }
   ]
 }

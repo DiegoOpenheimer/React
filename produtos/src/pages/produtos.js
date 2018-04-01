@@ -18,12 +18,24 @@ export default class Produtos extends Component {
         .get('http://localhost:3001/categorias')
         .then( res => this.setState({categorias:res.data}))    
     }
+
+    deleteCategory(id) {
+        axios
+        .delete('http://localhost:3001/categorias/'+id)
+        .then( res=>{
+            let categories = [...this.state.categorias]
+            this.setState({categorias:categories.filter(v=>v.id!==id)})
+        })
+    }
     
     renderLinkCategorias() {
         return this.state.categorias.map( v => {
             return(
-                <li key={v.id}>
-                    <Link to={`/produtos/categorias/${v.id}`}>{v.categoria}</Link>
+                <li key={v.id} className="showButton">
+                    <Link className="myLink" to={`/produtos/categorias/${v.id}`}>{v.categoria}</Link>
+                    <button onClick={this.deleteCategory.bind(this, v.id)} className="btn btn-sm btnDelete">
+                        <span className="glyphicon glyphicon-remove"></span>
+                    </button>
                 </li>
             )
         })
