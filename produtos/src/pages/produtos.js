@@ -3,20 +3,28 @@ import { Route, Link } from 'react-router-dom'
 import axios from 'axios'
 import ProdutosHome from './produtosHome'
 import Categorias from './categorias'
+import { Notification } from 'react-notification';
+import * as Observable  from 'rxjs';
 
 export default class Produtos extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            categorias: []
+            categorias: [],
+            showError: false
         }
     }
 
     componentDidMount() {
         axios
         .get('http://localhost:3001/categorias')
-        .then( res => this.setState({categorias:res.data}))    
+        .then( res => this.setState({categorias:res.data}))
+        .catch(()=>{
+            this.setState({showError: true})
+            const hideError = Observable.timer(3000)
+            hideError.subscribe(()=>this.setState({showError:false}))
+        })    
     }
 
     deleteCategory(id) {
@@ -42,7 +50,7 @@ export default class Produtos extends Component {
     }
 
     handlerKeyUp(key) {
-        if(key.keyCode == 13) {
+        if(key.keyCode === 13) {
             axios.post('http://localhost:3001/categorias',{
                 categoria: this.refs.newCategory.value
             }).then( res => {
@@ -74,6 +82,9 @@ export default class Produtos extends Component {
                 <Route exact path={this.props.match.url} component={ProdutosHome} />
                 <Route path={this.props.match.url+'/categorias/:catId'} component={Categorias} />
                 </div>
+                <Notification
+                    isActive={this.state.showError}
+                    message={'Erro ao carregar produtos'}/>
             </div>
         )
     }

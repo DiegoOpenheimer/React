@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import 'bootstrap-css-only'
+import $ from 'jquery'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 import base from './Firebase/firebase'
 
@@ -31,10 +33,12 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container">
-        <NewComment newComment={this.postNewComment.bind(this)} />
-        <Comment comments={this.state.comments} />
-      </div>
+      <Router>
+        <div className="container">
+          <NewComment newComment={this.postNewComment.bind(this)} />
+          <Comment comments={this.state.comments} />
+       </div>
+      </Router>
     )
   }
 }
