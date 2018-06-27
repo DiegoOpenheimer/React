@@ -1,18 +1,3 @@
-.btnDelete {
-    margin-left: 10px;
-    display: none !important;
-}
-
-li.showButton:hover .btnDelete {
-    display: inline-block !important;
-}
-
-.myLink:hover {
-    border-radius: 10px;
-    background-color: #ffbf00;
-    text-decoration: none
-}
-
 .myLink:active, .myLink:visited, .myLink:link {
     text-decoration: none
 }

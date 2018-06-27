@@ -12,8 +12,10 @@ export default class Produtos extends Component {
         super(props)
         this.state = {
             categorias: [],
-            showError: false
+            showError: false,
+            editingCategory: undefined
         }
+        this.sendToServerToRenameCategory = this.sendToServerToRenameCategory.bind(this)
     }
 
     componentDidMount() {
@@ -39,14 +41,66 @@ export default class Produtos extends Component {
     renderLinkCategorias() {
         return this.state.categorias.map( v => {
             return(
-                <li key={v.id} className="showButton">
-                    <Link className="myLink" to={`/produtos/categorias/${v.id}`}>{v.categoria}</Link>
-                    <button onClick={this.deleteCategory.bind(this, v.id)} className="btn btn-sm btnDelete">
-                        <span className="glyphicon glyphicon-remove"></span>
-                    </button>
+                <li style={{display:'flex'}} key={v.id}>
+                    {
+                        this.state.editingCategory === v.id &&
+                        <div className="input-group">
+                            <div className="input-group-btn">
+                                <input ref={'inputEdit'} onKeyUp={event => this.confirmEditing.bind(this, event, v)()} defaultValue={v.categoria} className="form-control" type="text" maxLength="20" />
+                                <button onClick={this.cancelEditing.bind(this)} className="btn">Cancelar</button>
+                            </div>
+                        </div>
+                    }
+                    {
+                        this.state.editingCategory !== v.id &&
+                    <div>
+                        <Link className="myLink" to={`/produtos/categorias/${v.id}`}>{v.categoria}</Link>
+                        <button onClick={this.deleteCategory.bind(this, v.id)} className="btn btn-sm">
+                            <span className="glyphicon glyphicon-remove"></span>
+                        </button>
+                        <button onClick={this.componentEdit.bind(this, v.id)} className="btn btn-sm">
+                            <span className="glyphicon glyphicon-pencil"></span>
+                        </button>
+                    </div>
+                    }
                 </li>
             )
         })
+    }
+
+    componentEdit(id) {
+        this.setState({editingCategory:id})
+    }
+
+    cancelEditing() {
+        this.setState({editingCategory:undefined})
+    }
+
+    confirmEditing(event, categoria) {
+        if(event.keyCode === 13) {
+            this.sendToServerToRenameCategory({
+                id: categoria.id,
+                categoria: this.refs.inputEdit.value
+            })
+        }
+    }
+
+    sendToServerToRenameCategory(categoria) {
+       axios.put('http://localhost:3001/categorias/'+categoria.id, categoria)
+       .then(()=>{
+            this.setState({editingCategory: undefined})
+            const categorias = this.state.categorias
+            let c = categorias.find(c=>c.id===categoria.id)
+            c.categoria = categoria.categoria
+            this.setState({categorias})
+        })
+       .catch(()=>{
+           this.setState({showError:true})
+           const observable = Observable.timer(3000)
+           observable.subscribe(() => {
+            this.setState({showError:false})
+           })
+       })
     }
 
     handlerKeyUp(key) {
@@ -90,3 +144,4 @@ export default class Produtos extends Component {
     }
 
 }
+

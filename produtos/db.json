@@ -18,8 +18,8 @@
   ],
   "categorias": [
     {
-      "categoria": "Alimentos",
-      "id": 2
+      "id": 2,
+      "categoria": "Alimentos"
     },
     {
       "categoria": "Testando",
