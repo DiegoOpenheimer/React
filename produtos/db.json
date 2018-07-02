@@ -14,6 +14,21 @@
       "id": 1,
       "produto": "Bolacha",
       "categoria": 2
+    },
+    {
+      "produto": "Banana",
+      "categoria": 2,
+      "id": 2
+    },
+    {
+      "produto": "Testando cadastro de produto",
+      "categoria": 3,
+      "id": 3
+    },
+    {
+      "produto": "Arroz",
+      "categoria": 2,
+      "id": 4
     }
   ],
   "categorias": [

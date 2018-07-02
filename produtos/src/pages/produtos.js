@@ -3,8 +3,9 @@ import { Route, Link } from 'react-router-dom'
 import axios from 'axios'
 import ProdutosHome from './produtosHome'
 import Categorias from './categorias'
-import { Notification } from 'react-notification';
-import * as Observable  from 'rxjs';
+import { Notification } from 'react-notification'
+import * as Observable  from 'rxjs'
+import ProdutoNovo from './produtoNovo'
 
 export default class Produtos extends Component {
 
@@ -83,7 +84,7 @@ export default class Produtos extends Component {
                 categoria: this.refs.inputEdit.value
             })
         }
-    }
+       }
 
     sendToServerToRenameCategory(categoria) {
        axios.put('http://localhost:3001/categorias/'+categoria.id, categoria)
@@ -131,9 +132,13 @@ export default class Produtos extends Component {
                             ref="newCategory"
                         />
                     </div>
+                    <Link className="btn btn-primary" to={`${this.props.match.url}/novo`}>Novo Produto</Link>
                 </div>
                 <div className="col-md-10">
                 <Route exact path={this.props.match.url} component={ProdutosHome} />
+                <Route exact path={this.props.match.url+'/novo'} render={props => {
+                    return <ProdutoNovo {...props} categorias={this.state.categorias} />
+                }} />
                 <Route path={this.props.match.url+'/categorias/:catId'} component={Categorias} />
                 </div>
                 <Notification
