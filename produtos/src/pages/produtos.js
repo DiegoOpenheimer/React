@@ -6,6 +6,7 @@ import Categorias from './categorias'
 import { Notification } from 'react-notification'
 import * as Observable  from 'rxjs'
 import ProdutoNovo from './produtoNovo'
+import ProdutoEdit from './produtoEdit'
 
 export default class Produtos extends Component {
 
@@ -138,6 +139,9 @@ export default class Produtos extends Component {
                 <Route exact path={this.props.match.url} component={ProdutosHome} />
                 <Route exact path={this.props.match.url+'/novo'} render={props => {
                     return <ProdutoNovo {...props} categorias={this.state.categorias} />
+                }} />
+                <Route exact path={this.props.match.url+'/editar/:id'} render={props => {
+                    return <ProdutoEdit {...props} categorias={this.state.categorias} />
                 }} />
                 <Route path={this.props.match.url+'/categorias/:catId'} component={Categorias} />
                 </div>

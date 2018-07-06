@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import Alert from 'react-s-alert'
+import { Link } from 'react-router-dom'
 
 export default class Categorias extends Component {
 
@@ -21,7 +22,10 @@ export default class Categorias extends Component {
         return(
             <div key={produto.id} className="well myRowWithFlex">
                 <h3 >{produto.produto}</h3>
+               <div>
                 <button onClick={() => this.removeProduct(produto)} className="btn btn-danger">Excluir</button>
+                <Link className="btn btn-primary" to={'/produtos/editar/'+produto.id}>Editar Produto</Link>
+               </div>
             </div>
         )
     }

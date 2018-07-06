@@ -1,14 +1,24 @@
 {
   "produtos": [
     {
-      "id": 1,
-      "produto": "Sabão em Pó",
-      "categoria": 1
+      "produto": "luva",
+      "categoria": "3",
+      "id": 2
     },
     {
-      "id": 1,
-      "produto": "Bolacha",
-      "categoria": 2
+      "produto": "arroz",
+      "categoria": "2",
+      "id": 3
+    },
+    {
+      "produto": "feijão",
+      "categoria": "2",
+      "id": 4
+    },
+    {
+      "produto": "nice",
+      "categoria": "4",
+      "id": 5
     }
   ],
   "categorias": [
@@ -17,8 +27,12 @@
       "categoria": "Alimentos"
     },
     {
-      "categoria": "Testando",
+      "categoria": "Limpeza",
       "id": 3
+    },
+    {
+      "categoria": "iuy",
+      "id": 4
     }
   ]
 }
