@@ -20,6 +20,7 @@ const handlerSuccessLogin = dispatch => {
     return result => {
         const token = result.data.token
         const decoded = jwtDecode(token)
+        localStorage.setItem('token', token)
         dispatch(updateUser(decoded))
     }
 }
