@@ -9,10 +9,10 @@ const login = ({ db, jwt, jwtSecret }) => async(req, res) => {
       const token = jwt.sign(user, jwtSecret)
       res.send({ token })
     } else {
-      res.send({ error: true, message: 'wrong credentials' })
+      res.status(404).send({ error: true, message: 'wrong credentials' })
     }
   } else {
-    res.send({ error: true, message: 'wrong credentials' })
+    res.status(404).send({ error: true, message: 'wrong credentials' })
   }
 }
 const get = ({ db }) => async(req, res) => {

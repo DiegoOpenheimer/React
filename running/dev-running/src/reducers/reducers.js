@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import { authController } from './reducers/auth'
+import auth from './auth/auth'
 
 const REDUCERS = combineReducers({
-    authController
+    auth
 })
 
 export default REDUCERS

@@ -7,17 +7,17 @@ const INITIAL_STATE = {
     errorMessage: ''
 }
 
-export const authController = (state = INITIAL_STATE, action) => {
-    switch(action) {
-        case 'isAuthing':
-            return { ...state, isAuthing: action.payload.isAuthing }
+const auth = (state = INITIAL_STATE, action) => {
+    switch(action.type) {
         case 'isAuth':
             return { ...state, isAuth: action.payload.isAuth }
+        case 'isAuthing':
+            return { ...state, isAuthing: action.payload.isAuthing }
         case 'isSigningin':
             return { ...state, isSigningin: action.payload.isSigningin }
         case 'user':
             return { ...state, user: action.payload.user }
-       case 'error':
+        case 'error':
             return { ...state, error: action.payload.error }
         case 'errorMessage':
             return { ...state, errorMessage: action.payload.errorMessage }
@@ -25,3 +25,5 @@ export const authController = (state = INITIAL_STATE, action) => {
             return state
     }
 }
+
+export default auth
