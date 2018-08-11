@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { getRuns } from '../../reducers/actions/runs'
+import { Table } from 'semantic-ui-react'
 
 class Runs extends React.Component {
 
@@ -12,45 +13,34 @@ class Runs extends React.Component {
         const date = new Date(run.created)
         const formatterDate = `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()} - ${date.getHours()}:${date.getMinutes()}`
         return(
-            <tr key={run.id}>
-                <td>{run.friendly_name}</td>
-                <td>{run.duration}</td>
-                <td>{formatterDate}</td>
-                <td>{run.distance}</td>
-            </tr>
+            <Table.Row key={run.id}>
+                <Table.Cell>{run.friendly_name}</Table.Cell>
+                <Table.Cell>{run.duration}</Table.Cell>
+                <Table.Cell>{formatterDate}</Table.Cell>
+                <Table.Cell>{run.distance}</Table.Cell>
+            </Table.Row>
         )
     }
 
     render() {
-        console.log(this.props.runs)
         return(
             <div>
                 <h1>Runs</h1>
-                <table style={styles.table}>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Duração</th>
-                            <th>Criado</th>
-                            <th>distância</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <Table color="red" celled striped>
+                    <Table.Header>
+                        <Table.Row>
+                            <Table.HeaderCell>Name</Table.HeaderCell>
+                            <Table.HeaderCell>Duração</Table.HeaderCell>
+                            <Table.HeaderCell>Criado</Table.HeaderCell>
+                            <Table.HeaderCell>distância</Table.HeaderCell>
+                        </Table.Row>
+                    </Table.Header>
+                    <Table.Body>
                         {this.props.runs && this.props.runs.map(this.renderBody)}
-                    </tbody>
-                </table>
+                    </Table.Body>
+                </Table>
             </div>
         )
-    }
-}
-
-const styles = {
-    table: {
-        border: '1px solid #000',
-        borderCollpase: 'collapse',
-        tableLayout: 'fixed',
-        width: '80%',
-        margin: 'auto'
     }
 }
 

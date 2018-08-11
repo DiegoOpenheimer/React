@@ -1,26 +1,24 @@
 import React from 'react'
-import logo from '../logo.svg';
 import { connect } from 'react-redux'
 import { doLogin } from '../reducers/actions/auth'
 import { Link } from 'react-router-dom'
+import { Menu } from 'semantic-ui-react'
 
 const Header = props => {
     return(
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-          <Link style={{color: '#FFF', margin:10}} to="/home">Home</Link>
+        <Menu>
+          <Menu.Item as={Link} to="/">Home</Menu.Item>
           {checkAuth(props)}
-          <Link style={{color: '#FFF', margin:10}} to="restrito">Restrito</Link>
-        </header>
+          <Menu.Item as={Link} to="restrito">Restrito</Menu.Item>
+        </Menu>
       )
 }
 
 const checkAuth = ({user}) => {
     if(user.role === 'admin') {
-        return <Link style={{color: '#FFF', margin:10}} to="/admin">Admin</Link>
+        return <Menu.Item as={Link} to="/admin">Admin</Menu.Item>
     } else {
-        return <Link style={{color: '#FFF', margin:10}} to="/login">Login</Link>
+        return <Menu.Item as={Link} to="/login">Login</Menu.Item>
     }
 }
 

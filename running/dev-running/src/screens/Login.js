@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { doLogin } from '../reducers/actions/auth'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
+import { Input, Label, Icon, Button } from 'semantic-ui-react'
 
 class Login extends React.Component {
 
@@ -32,15 +33,16 @@ class Login extends React.Component {
     
     render() {
         if(this.props.isAuth) {
-            return <Redirect to="/home" />
+            return <Redirect to="/" />
         } else {
             return(
                 <div style={{height: '10vh', display:'flex', alignItems:'center', justifyContent:'center'}}>
-                    <label htmlFor="idEmail">Email: </label>
-                        <input onChange={this.handlerForm('email')} value={this.state.form.email} placeholder="Informe email" max={30} type="text" id="idEmail" />
-                    <label htmlFor="idSenha">Senha: </label>
-                        <input onChange={this.handlerForm('password')} value={this.state.form.password} placeholder="Informe senha" max={30} type="password" id="idSenha" />
-                    <button onClick={this.login}>Logar</button>
+                    <Link to="/"><Icon color="black" name="angle left" size="large" /></Link>
+                    <Label color="red">Email: </Label>
+                        <Input onChange={this.handlerForm('email')} value={this.state.form.email} placeholder="Informe email" maxLength={30} type="text" icon="mail" />
+                    <Label color="red">Senha: </Label>
+                        <Input onChange={this.handlerForm('password')} value={this.state.form.password} placeholder="Informe senha" maxLength={30} type="password" icon="key" />
+                    <Button loading={this.props.isAuthing} primary onClick={this.login}>Logar</Button>
                 </div>
             )
         }
@@ -49,7 +51,8 @@ class Login extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth,
+        isAuthing: state.auth.isAuthing
     }
 }
 

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import { Provider } from 'react-redux'
 import store from './reducers/index'
 import Header from './components/Header'
@@ -9,6 +8,8 @@ import Login from './screens/Login'
 import Admin from './screens/Admin/Admin'
 import Restrito from './screens/Restrito/Restrito'
 import Alert from 'react-s-alert'
+import 'semantic-ui-css/semantic.min.css';
+import { Container } from 'semantic-ui-react'
 
 // mandatory
 import 'react-s-alert/dist/s-alert-default.css';
@@ -27,17 +28,13 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Router>
-          <div className="App">
-          <Route path="/home" component={Home}/>
+          <Container>
+          <Route exact path="/" component={Home}/>
           <Route path="/login" component={Login} />
           <Route path="/admin" component={Admin} />
           <Route path="/restrito" component={Restrito} />
-            <Header />
-            <p className="App-intro">
-              To get started, edit <code>src/App.js</code> and save to reload.
-            </p>
-            <Alert stack={{limit: 3}} />
-          </div>
+          <Alert stack={{limit: 3}} />
+          </Container>
         </Router>
       </Provider>
     );
