@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { doLogin } from '../reducers/actions/auth'
-import { Redirect, Link } from 'react-router-dom'
-import { Input, Label, Icon, Button } from 'semantic-ui-react'
+import { Redirect } from 'react-router-dom'
+import { Input, Label, Button } from 'semantic-ui-react'
 
 class Login extends React.Component {
 
@@ -37,7 +37,6 @@ class Login extends React.Component {
         } else {
             return(
                 <div style={{height: '10vh', display:'flex', alignItems:'center', justifyContent:'center'}}>
-                    <Link to="/"><Icon color="black" name="angle left" size="large" /></Link>
                     <Label color="red">Email: </Label>
                         <Input onChange={this.handlerForm('email')} value={this.state.form.email} placeholder="Informe email" maxLength={30} type="text" icon="mail" />
                     <Label color="red">Senha: </Label>

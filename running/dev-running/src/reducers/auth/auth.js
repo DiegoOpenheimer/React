@@ -7,6 +7,7 @@ const INITIAL_STATE = {
     errorMessage: ''
 }
 
+
 const auth = (state = INITIAL_STATE, action) => {
     switch(action.type) {
         case 'isAuth':

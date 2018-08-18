@@ -21,7 +21,7 @@ const handlerSuccess = dispatch => result => {
 
 }
 
-const handlerError = dispatch => result => {
+const handlerError = dispatch => e => {
     dispatch(isLoading(false))
     dispatch(error(true))
     dispatch(errorMessage('Error to request runs'))

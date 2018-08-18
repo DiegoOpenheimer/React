@@ -3,11 +3,11 @@ import jwtDecode from 'jwt-decode'
 import { alertError } from '../../utils/alert'
 
 
-const isAuth = (value) => ({type: 'isAuth', payload:{isAuth:value}})
+export const isAuth = (value) => ({type: 'isAuth', payload:{isAuth:value}})
 const isAuthing = (value) => ({type: 'isAuthing', payload:{isAuthing:value}})
 const error = (value) => ({type: 'error', payload:{error:value}})
 const errorMessage = (message) => ({type: 'errorMessage', payload:{errorMessage:message}})
-const updateUser = (user) => ({type: 'user', payload:{user:user}})
+export const updateUser = (user) => ({type: 'user', payload:{user:user}})
 
 const handlerError = (dispatch) => {
     return (e) => {
@@ -38,3 +38,13 @@ export const doLogin = (user) => {
         .catch(handlerError(dispatch))
     }
 }
+
+export const destroyedSession = () => {
+    return dispatch => {
+        localStorage.removeItem('token')
+        dispatch(isAuth(false))
+        dispatch(updateUser(null))
+    }
+}
+
+
