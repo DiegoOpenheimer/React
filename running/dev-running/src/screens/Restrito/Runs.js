@@ -2,6 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { getRuns } from '../../reducers/actions/runs'
 import { Table } from 'semantic-ui-react'
+import Duration from "../Elements/Duration";
+import Distance from '../Elements/Distance'
 
 class Runs extends React.Component {
 
@@ -15,9 +17,9 @@ class Runs extends React.Component {
         return(
             <Table.Row key={run.id}>
                 <Table.Cell>{run.friendly_name}</Table.Cell>
-                <Table.Cell>{run.duration}</Table.Cell>
+                <Table.Cell><Duration duration={run.duration} /></Table.Cell>
+                <Table.Cell><Distance distance={run.distance} form={"metric"}/></Table.Cell>
                 <Table.Cell>{formatterDate}</Table.Cell>
-                <Table.Cell>{run.distance}</Table.Cell>
             </Table.Row>
         )
     }
@@ -31,8 +33,8 @@ class Runs extends React.Component {
                         <Table.Row>
                             <Table.HeaderCell>Name</Table.HeaderCell>
                             <Table.HeaderCell>Duração</Table.HeaderCell>
-                            <Table.HeaderCell>Criado</Table.HeaderCell>
                             <Table.HeaderCell>distância</Table.HeaderCell>
+                            <Table.HeaderCell>Criado</Table.HeaderCell>
                         </Table.Row>
                     </Table.Header>
                     <Table.Body>

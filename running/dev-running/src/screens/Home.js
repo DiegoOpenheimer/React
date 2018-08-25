@@ -16,7 +16,7 @@ class Home extends React.Component {
     }
 
     render() {
-        if(localStorage.getItem('token')) {
+        if(this.props.isAuthenticate) {
             return(
                 <div>
                     <Header />
@@ -31,7 +31,8 @@ class Home extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        user: state.auth.user
+        user: state.auth.user,
+        isAuthenticate: state.auth.isAuth
     }
 }
 export default connect(mapStateToProps, { isAuth, updateUser })(Home)

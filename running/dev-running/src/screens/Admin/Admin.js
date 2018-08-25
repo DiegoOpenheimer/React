@@ -1,6 +1,6 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import {connect} from 'react-redux'
+import {Redirect} from 'react-router-dom'
 
 const component = (
     <div>
@@ -9,8 +9,8 @@ const component = (
 )
 
 const Admin = props => {
-    if(props.user.role !== 'admin') {
-        return <Redirect to="/home" />
+    if (props.user.role !== 'admin') {
+        return <Redirect to="/"/>
     } else {
         return component
     }
