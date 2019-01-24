@@ -2,7 +2,7 @@ import axios from 'axios'
 const PORT = 3001
 
 const instance = axios.create({
-    baseURL: 'http://192.168.56.1:'+PORT,
+    baseURL: 'http://localhost:'+PORT,
     timeout: 10 * 1000
 })
 
